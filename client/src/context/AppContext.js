@@ -7,7 +7,7 @@ export const AppContent = createContext();
 
 export const AppContextProvider = (props) => {
     axios.defaults.withCredentials = true;
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const backendUrl = "https://login-signup-jwt-backend.onrender.com";
 
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [userData, setUserData] = useState(null);
