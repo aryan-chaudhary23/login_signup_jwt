@@ -13,8 +13,16 @@ connectDB(); //this calls the connectDB function to connect to the database
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = ['https://login-signup-jwt-frontend-q7t3.onrender.com'];;
-app.use(cors({origin: allowedOrigins, credentials: true})) //credentials=True allows the server to accept cookies from the client
+const allowedOrigins = ['https://login-signup-jwt-frontend-q7t3.onrender.com'];
+
+app.use(cors({
+  origin: allowedOrigins[0], // explicitly allow only this
+  credentials: true,         // allow cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+app.options('*', cors()); // allow preflight
+
 
 app.use('/api/auth',authRouter)//this will use the authRouter for all routes that start with /api/auth
 app.use('/api/user',userRouter)//this will use the userAuth middleware for all routes that start with /api/user
